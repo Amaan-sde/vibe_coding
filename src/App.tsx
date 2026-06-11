@@ -258,11 +258,11 @@ export default function App() {
         <nav className="flex items-center justify-between gap-4 border-b border-white/5 pb-6 bg-transparent">
           
           {/* Logo on Left */}
-          <div className="flex items-center gap-3 select-none" id="logo-branding">
-            <div className="w-8 h-8 rounded-lg bg-teal-brand flex items-center justify-center text-black font-extrabold text-sm shadow-md shadow-teal-brand/20">
+          <div className="flex items-center gap-2 sm:gap-3 select-none" id="logo-branding">
+            <div className="w-6 h-6 sm:w-8 sm:h-8 rounded-lg bg-teal-brand flex items-center justify-center text-black font-extrabold text-xs sm:text-sm shadow-md shadow-teal-brand/20">
               S
             </div>
-            <span className="font-display font-black text-lg tracking-wider text-white">SPACECRAFT</span>
+            <span className="font-display font-black text-xs sm:text-sm lg:text-lg tracking-widest sm:tracking-wider text-white">SPACECRAFT</span>
           </div>
 
           {/* Centered Navigation Menu Options in DM Sans - Custom styled capsule with transparent background overlay */}
@@ -294,10 +294,10 @@ export default function App() {
           </div>
 
           {/* Simple Clean Menu capsule button on the right (No search or music play widgets) */}
-          <div className="flex items-center gap-4" id="nav-right-actions">
+          <div className="flex items-center gap-2.5 sm:gap-4" id="nav-right-actions">
             
             {/* Language Switchers as pure text options */}
-            <div className="flex items-center gap-2 text-xs font-mono" id="nav-language-switcher">
+            <div className="flex items-center gap-1.5 sm:gap-2 text-[10px] sm:text-xs font-mono" id="nav-language-switcher">
               <button 
                 onClick={() => setLanguage("EN")} 
                 className={`font-semibold transition-colors cursor-pointer ${language === "EN" ? "text-teal-brand" : "text-zinc-500 hover:text-white"}`}
@@ -313,15 +313,16 @@ export default function App() {
               </button>
             </div>
 
-            {/* Menu Capsule Button - No other icons besides this */}
+            {/* Menu Capsule Button - Only other icons besides this */}
             <button 
               id="nav-menu-btn"
               onClick={() => setIsMenuOpen(true)}
-              className="flex items-center gap-3 bg-neutral-900 border border-neutral-800 rounded-full pl-5 pr-1.5 py-1.5 text-xs tracking-widest uppercase hover:bg-neutral-800 hover:border-neutral-700 transition-all duration-300"
+              className="flex items-center gap-1.5 sm:gap-3 bg-neutral-900 border border-neutral-800 rounded-full pl-3 pr-1 sm:pl-5 sm:pr-1.5 py-1 sm:py-1.5 text-[10px] sm:text-xs tracking-widest uppercase hover:bg-neutral-800 hover:border-neutral-700 transition-all duration-300"
             >
-              <span className="text-zinc-300 font-medium tracking-wider">{t.menu}</span>
-              <div className="w-6 h-6 rounded-full bg-teal-brand hover:bg-teal-brand-hover flex items-center justify-center text-black">
-                <Menu size={12} strokeWidth={2.5} />
+              <span className="text-zinc-300 font-medium tracking-wider hidden sm:inline-block">{t.menu}</span>
+              <div className="w-5 h-5 sm:w-6 sm:h-6 rounded-full bg-teal-brand hover:bg-teal-brand-hover flex items-center justify-center text-black">
+                <Menu size={10} className="sm:hidden" strokeWidth={2.5} />
+                <Menu size={12} className="hidden sm:block" strokeWidth={2.5} />
               </div>
             </button>
 
@@ -353,7 +354,7 @@ export default function App() {
         {/* Main telemetry sandbox frame representing the primary viewport */}
         <section 
           id="orbital-hud-sandbox"
-          className="relative w-full h-[400px] lg:h-[460px] bg-black border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between p-6 transition-all duration-500"
+          className="relative w-full h-[280px] sm:h-[400px] lg:h-[460px] bg-black border border-white/10 rounded-2xl overflow-hidden flex flex-col justify-between p-4 sm:p-6 transition-all duration-500"
           style={{
             backgroundImage: "radial-gradient(circle at center, rgb(15, 23, 30) 0%, rgb(0,0,0) 100%)"
           }}
@@ -388,19 +389,19 @@ export default function App() {
           </div>
 
           {/* Core UI text overlays and floating cards inside the HUD bounds */}
-          <div className="absolute top-4 left-6 z-10 font-mono text-[9px] text-zinc-500 flex items-center gap-3">
+          <div className="absolute top-4 left-4 sm:left-6 z-10 font-mono text-[9px] text-zinc-500 flex items-center gap-2 sm:gap-3">
             <span className="w-2 h-2 rounded-full bg-teal-brand animate-pulse" />
             <span>MISSION ID: VOYAGE_RGL_{activeMission.number}</span>
             <span>|</span>
-            <span>VESSEL SPEC: {activeMission.stats.vessel}</span>
+            <span className="hidden sm:inline">VESSEL SPEC: {activeMission.stats.vessel}</span>
           </div>
 
-          <div className="absolute top-4 right-6 z-10 font-mono text-[9px] text-zinc-500">
+          <div className="absolute top-4 right-4 sm:right-6 z-10 font-mono text-[9px] text-zinc-500">
             <span>GRID MATRIX RESOLUTION: CALIBRATED</span>
           </div>
 
           {/* Left vertical floaters: 01, 02, 03 capsules exactly like the reference wireframe */}
-          <div className="z-10 flex flex-col justify-center h-full gap-4 max-w-fit" id="mission-step-indicators">
+          <div className="z-10 flex flex-col justify-center h-full gap-2 sm:gap-4 max-w-fit" id="mission-step-indicators">
             {(["01", "02", "03"] as const).map((step) => (
               <button
                 key={step}
@@ -409,7 +410,7 @@ export default function App() {
                   setActiveTab(step);
                   setActiveCardDetail({ type: null, title: "", tag: "", desc: [], metrics: [] });
                 }}
-                className={`relative px-4 py-2 text-xs font-mono font-bold rounded-lg transition-all duration-300 w-12 h-14 flex items-center justify-center border ${
+                className={`relative px-2 sm:px-4 py-1.5 sm:py-2 text-[10px] sm:text-xs font-mono font-bold rounded-md sm:rounded-lg transition-all duration-300 w-9 h-11 sm:w-12 sm:h-14 flex items-center justify-center border ${
                   activeTab === step
                     ? "bg-teal-brand text-black border-teal-brand shadow-lg shadow-teal-brand/20 scale-105"
                     : "bg-neutral-900/80 text-zinc-400 border-neutral-800 hover:text-white hover:border-zinc-700"
@@ -427,8 +428,8 @@ export default function App() {
             ))}
           </div>
 
-          {/* Right Floating Structural Cards */}
-          <div className="absolute right-6 bottom-6 z-10 flex flex-col sm:flex-row gap-4 max-w-[92%] sm:max-w-[500px] w-full" id="hud-right-floater-cards">
+          {/* Right Floating Structural Cards - Only visible inside HUD on lg (desktop) screens */}
+          <div className="hidden lg:flex absolute right-6 bottom-6 z-10 flex-col sm:flex-row gap-4 max-w-[500px] w-full" id="hud-right-floater-cards">
             
             {/* CARD 1: Astronauts Tracker Badge */}
             <motion.div 
@@ -515,17 +516,17 @@ export default function App() {
           </div>
 
           {/* LOWER-MIDDLE ROTATING CALL TO ACTION BAR (As requested, keeping this structural component) */}
-          <div className="absolute bottom-[-16px] left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
+          <div className="absolute bottom-[-12px] sm:bottom-[-16px] left-1/2 -translate-x-1/2 z-20 flex flex-col items-center">
             
             <button 
               id="center-flight-launch-btn"
               onClick={() => setShowLaunchModal(true)}
-              className="w-16 h-16 rounded-full bg-teal-brand text-black hover:bg-white flex items-center justify-center transition-all duration-300 relative group shadow-2xl shadow-teal-brand/20 border-4 border-black"
+              className="w-12 h-12 sm:w-16 sm:h-16 rounded-full bg-teal-brand text-black hover:bg-white flex items-center justify-center transition-all duration-300 relative group shadow-2xl shadow-teal-brand/20 border-[3px] sm:border-4 border-black"
               title="Initiate Launch Protocol Alignment"
             >
               {/* Rotating outer curved badge with custom text along path SVG */}
-              <div className="absolute inset-0 -m-10 pointer-events-none">
-                <svg className="w-36 h-36 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[spin_15s_linear_infinite]" viewBox="0 0 100 100">
+              <div className="absolute inset-0 -m-8 sm:-m-10 pointer-events-none">
+                <svg className="w-28 h-28 sm:w-36 sm:h-36 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 animate-[spin_15s_linear_infinite]" viewBox="0 0 100 100">
                   <path id="circlePath" d="M 50, 50 m -35, 0 a 35,35 0 1,1 70,0 a 35,35 0 1,1 -70,0" fill="none" />
                   <text className="font-mono text-[6.2px] uppercase tracking-[0.22em] fill-teal-brand font-bold">
                     <textPath href="#circlePath" startOffset="0%">
@@ -535,13 +536,101 @@ export default function App() {
                 </svg>
               </div>
 
-              {/* Diagonal up arrow inside */}
-              <ArrowUpRight size={24} strokeWidth={2.5} className="group-hover:rotate-45 transition-transform duration-300" />
+              {/* Diagonal up arrow inside - Responsive sizes */}
+              <ArrowUpRight size={18} strokeWidth={2.5} className="sm:hidden group-hover:rotate-45 transition-transform duration-300" />
+              <ArrowUpRight size={24} strokeWidth={2.5} className="hidden sm:flex group-hover:rotate-45 transition-transform duration-300" />
             </button>
 
           </div>
 
         </section>
+
+        {/* Responsive Telemetry Badges - Visible on mobile/tablet, hidden on desktop (lg) */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 lg:hidden mt-2" id="mobile-viewport-telemetry-badges">
+          
+          {/* CARD 1: Astronauts Tracker Badge */}
+          <motion.div 
+            id="mobile-astronauts-telemetry-badge"
+            whileHover={{ scale: 1.01 }}
+            className="bg-neutral-950/80 border border-white/10 rounded-2xl p-4 shadow-xl flex flex-col gap-3 relative"
+          >
+            <div className="flex items-center justify-between border-b border-white/5 pb-2">
+              <div className="flex items-center gap-1.5">
+                <Activity size={13} className="text-teal-brand animate-pulse" />
+                <span className="font-mono text-[10px] font-semibold text-zinc-400 uppercase tracking-widest leading-none">{t.crew}</span>
+              </div>
+              <div className="px-1.5 py-0.5 rounded-full bg-green-500/10 text-green-400 font-mono text-[7px] font-bold">
+                TELEMETRY
+              </div>
+            </div>
+
+            {/* Astronaut profiles */}
+            <div className="space-y-2.5">
+              {activeMission.astronauts.slice(0, 2).map((member, idx) => (
+                <div key={idx} className="flex items-center justify-between gap-3 text-xs">
+                  <div className="flex items-center gap-2">
+                    <div className="w-6 h-6 rounded-full bg-zinc-800 border border-zinc-700 flex items-center justify-center text-[9px] font-mono font-bold text-white uppercase">
+                      {member.avatarInitials}
+                    </div>
+                    <div className="flex flex-col">
+                      <span className="font-bold text-zinc-200 text-[10px] leading-tight font-display">{member.name}</span>
+                      <span className="text-[8px] text-zinc-500 font-mono">{member.role}</span>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+
+            <div className="flex items-center justify-between pt-1.5 border-t border-white/5 text-[9px] font-mono text-zinc-400">
+              <div className="flex items-center gap-1">
+                <Heart size={10} className="text-rose-500 fill-rose-500 animate-ping" />
+                <span>CRUM_BPM: <strong className="text-white">{heartRate}</strong></span>
+              </div>
+              <span className="text-green-500">LIFE_S_OK</span>
+            </div>
+          </motion.div>
+
+          {/* CARD 2: Universal Stars Indicator */}
+          <motion.div 
+            id="mobile-stars-telemetry-badge"
+            whileHover={{ scale: 1.01 }}
+            className="bg-neutral-950/80 border border-white/10 rounded-2xl p-4 shadow-xl flex flex-col gap-2"
+          >
+            <div className="flex items-center justify-between text-[10px] font-mono text-zinc-400 tracking-wider">
+              <span className="flex items-center gap-1.5 uppercase font-semibold text-white">
+                <Sparkles size={11} className="text-white" />
+                {t.stars}
+              </span>
+              <span className="text-teal-brand font-bold text-[8px] font-mono">SEC_9X</span>
+            </div>
+
+            <div className="space-y-1 mt-1 text-xs font-mono">
+              <div className="flex justify-between text-zinc-400 text-[10px]">
+                <span>MAPPED SECTORS:</span>
+                <span className="text-white font-bold">14,204</span>
+              </div>
+              <div className="flex justify-between text-zinc-400 text-[10px]">
+                <span>CO-CHART SPEED:</span>
+                <span className="text-white font-bold">Warp 3.4</span>
+              </div>
+              <div className="flex justify-between text-zinc-400 text-[10px]">
+                <span>RADIAL INDEX:</span>
+                <span className="text-white font-bold">98.2%</span>
+              </div>
+            </div>
+            
+            <div className="border-t border-white/5 pt-1.5 mt-1">
+              <div className="w-full bg-zinc-800 h-1 rounded-full overflow-hidden">
+                <div className="bg-teal-brand h-full rounded-full transition-all duration-1000" style={{ width: activeTab === "01" ? "42%" : activeTab === "02" ? "79%" : "91%" }} />
+              </div>
+              <div className="flex justify-between text-[7px] font-mono text-zinc-500 mt-1 uppercase">
+                <span>SENSORS STABLE</span>
+                <span>SYNC OK</span>
+              </div>
+            </div>
+          </motion.div>
+
+        </div>
 
         {/* ----------------- LOWER INFORMATION & NAVIGATION FOOTER GRID ----------------- */}
         <section className="grid grid-cols-1 lg:grid-cols-12 gap-6 mt-2 mb-8" id="footer-details-grid">
@@ -553,7 +642,7 @@ export default function App() {
                 {activeMission.title}
               </span>
               
-              <h1 className="font-display text-[28px] md:text-[52px] font-bold tracking-tight text-white leading-[1.1] md:leading-[56px]" style={{ fontSize: '52px', lineHeight: '56px' }}>
+              <h1 className="font-display text-2xl sm:text-4xl md:text-5xl lg:text-[52px] font-black tracking-tight text-white leading-[1.1] lg:leading-[56px]">
                 {activeMission.headline}
               </h1>
               
@@ -870,7 +959,7 @@ export default function App() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#0b0e11] border border-teal-brand/40 max-w-lg w-full rounded-2xl p-6 shadow-2xl relative font-mono text-xs"
+              className="bg-[#0b0e11] border border-teal-brand/40 max-w-lg w-full rounded-2xl p-6 shadow-2xl relative font-mono text-xs max-h-[90vh] overflow-y-auto"
             >
               <button 
                 onClick={() => { setShowLaunchModal(false); setLaunchStep(0); }}
@@ -973,7 +1062,7 @@ export default function App() {
               initial={{ opacity: 0, scale: 0.95 }}
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.95 }}
-              className="bg-neutral-950 border border-white/10 max-w-2xl w-full rounded-2xl p-6 shadow-2xl relative"
+              className="bg-neutral-950 border border-white/10 max-w-2xl w-full rounded-2xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto"
             >
               <button 
                 onClick={() => setShowDiscoverModal(false)}
@@ -1030,7 +1119,7 @@ export default function App() {
               initial={{ scale: 0.95, opacity: 0 }}
               animate={{ scale: 1, opacity: 1 }}
               exit={{ scale: 0.95, opacity: 0 }}
-              className="bg-[#0b0e11] border border-white/15 max-w-md w-full rounded-2xl p-6 shadow-2xl relative"
+              className="bg-[#0b0e11] border border-white/15 max-w-md w-full rounded-2xl p-6 shadow-2xl relative max-h-[90vh] overflow-y-auto"
             >
               <button 
                 onClick={() => setShowMoreModal({ isOpen: false, contentId: null })}
@@ -1106,8 +1195,8 @@ export default function App() {
       {/* 4. Large Interactive Navigation Overlay Menu */}
       <AnimatePresence>
         {isMenuOpen && (
-          <div className="fixed inset-0 bg-black/95 z-50 flex flex-col justify-between p-6 md:p-12">
-            <div>
+          <div className="fixed inset-0 bg-black/95 z-50 flex flex-col justify-between p-6 md:p-12 overflow-y-auto">
+            <div className="w-full">
               {/* Menu Header */}
               <div className="flex justify-between items-center border-b border-white/10 pb-6 max-w-7xl mx-auto w-full">
                 <div className="flex items-center gap-2 font-mono text-xs">
