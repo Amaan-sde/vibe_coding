@@ -1,0 +1,6 @@
+{
+  "name": "Spacecraft Hero Section",
+  "description": "An interactive hero section layout for a spacecraft website, based on a reference wireframe with a pure black backdrop and clean structural UI elements.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
